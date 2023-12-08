@@ -1,50 +1,32 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
+import icon from '../../assets/icon.png';
 import './App.css';
+import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+
+import "primereact/resources/themes/lara-dark-amber/theme.css";
+import { Card } from 'primereact/card';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+        
 
 function Hello() {
   return (
-    <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="folded hands">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
+    <Card style={{display: "flex"}} title="Login">
+      <InputText type="text" className="p-inputtext-lg" placeholder="Email" />
+      <InputText type="password" className="p-inputtext-lg" placeholder="password" />
+      <Button label="Primary" rounded />
+    </Card>
   );
 }
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Hello />} />
-      </Routes>
-    </Router>
+    <PrimeReactProvider>
+      <Router>
+        <Routes>
+            <Route path="/" element={<Hello />} />
+        </Routes>
+      </Router>
+    </PrimeReactProvider>
   );
 }
