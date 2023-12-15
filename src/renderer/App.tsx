@@ -1,30 +1,24 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.png';
 import './App.css';
-import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+import { PrimeReactProvider } from 'primereact/api';
 
 import "primereact/resources/themes/lara-dark-amber/theme.css";
-import { Card } from 'primereact/card';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-        
-
-function Hello() {
-  return (
-    <Card style={{display: "flex"}} title="Login">
-      <InputText type="text" className="p-inputtext-lg" placeholder="Email" />
-      <InputText type="password" className="p-inputtext-lg" placeholder="password" />
-      <Button label="Primary" rounded />
-    </Card>
-  );
-}
+import Login from './Login';
+import Home from './Home';
+import { useEffect, useState } from 'react';
 
 export default function App() {
+  const [token, setToken] = useState<string | null>(null)
+  useEffect(() => {
+    setToken(localStorage.getItem('ACCESS_TOKEN'))
+  }, [])
+ 
   return (
     <PrimeReactProvider>
       <Router>
         <Routes>
-            <Route path="/" element={<Hello />} />
+            <Route path="/" element={!!token ? <Home /> : <Login />} />
+            <Route path="/home" element={<Home />} />
         </Routes>
       </Router>
     </PrimeReactProvider>
